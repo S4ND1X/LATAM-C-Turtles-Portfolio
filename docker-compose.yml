@@ -25,10 +25,10 @@ services:
       - 80:80
       - 443:443
     volumes:
-      - nginx_secrets:/etc/letsencrypt
+      - /etc/letsencrypt/:/etc/letsencrypt
       - ./user_conf.d:/etc/nginx/user_conf.d
     depends_on:
       - web
 
 volumes:
-  nginx_secrets:
+ nginx_secrets:
