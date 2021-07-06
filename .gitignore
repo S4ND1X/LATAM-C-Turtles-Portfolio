@@ -2,5 +2,8 @@
 mlh-portfolio
 /env
 
+#env file
+env
+
 #DB Name
 flask.sqlite
