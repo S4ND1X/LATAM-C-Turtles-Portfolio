@@ -9,11 +9,9 @@ click==8.0.1
 ConfigArgParse==0.14.0
 configobj==5.0.6
 cryptography==3.2.1
-dbus-python==1.2.4
 decorator==4.2.1
 distlib==0.3.2
 distro==1.4.0
-ethtool==0.14
 filelock==3.0.12
 Flask==2.0.1
 gunicorn==20.1.0
@@ -35,10 +33,8 @@ ply==3.9
 prettytable==0.7.2
 ptyprocess==0.5.2
 pyasn1==0.3.7
-pycairo==1.16.3
 pycparser==2.14
 pydbus==0.6.0
-pygobject==3.28.3
 pyinotify==0.9.6
 PyJWT==1.6.1
 pyOpenSSL==19.0.0
