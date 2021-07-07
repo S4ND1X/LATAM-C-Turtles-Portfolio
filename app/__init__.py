@@ -1,15 +1,14 @@
-from flask import Flask, render_template, url_for, json, Response, request
 import os
-#from . import db
-
-#Login and register
-from werkzeug.security import generate_password_hash, check_password_hash
-from app.db import get_db
-
+from werkzeug.security import check_password_hash, generate_password_hash
+from flask import Flask, render_template, url_for, json, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
+# from . import db
+# from app.db import get_db
 
 app = Flask(__name__)
+# app.config['DATABASE'] = os.path.join(os.getcwd(), 'flask.sqlite')
+# db.init_app(app)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{table}'.format(
     user=os.getenv('POSTGRES_USER'),
     passwd=os.getenv('POSTGRES_PASSWORD'),
@@ -37,6 +36,28 @@ class UserModel(db.Model):
         return f"<User {self.username}>"
 
 
+# code by kOssi (https://stackoverflow.com/questions/21133976/flask-load-local-json)
+SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
+SITE_FOLDER = "static/data"
+
+
+@app.route('/')
+def index():
+    return render_template('landing_page.html')
+
+
+@app.route('/profile/<name>')
+def profile(name):
+    json_url = os.path.join(SITE_ROOT, SITE_FOLDER, f"{name}.json")
+    data = json.load(open(json_url))
+    return render_template('profile.html', data=data)
+
+
+@app.route('/health')
+def health():
+    return 'It Works!', 200
+
+
 @app.route('/register', methods=('GET', 'POST'))
 def register():
     if request.method == 'POST':
@@ -59,8 +80,7 @@ def register():
         else:
             return error, 418
 
-    # TODO: Return a restister page
-    return "Register Page not yet implemented", 501
+    return render_template('register.html')
 
 
 @app.route('/login', methods=('GET', 'POST'))
@@ -80,6 +100,4 @@ def login():
             return "Login Successful", 200
         else:
             return error, 418
-
-    # TODO: Return a login page
-    return "Login Page not yet implemented", 501
+    return render_template('login.html', error='')
