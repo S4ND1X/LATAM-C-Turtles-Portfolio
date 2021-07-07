@@ -22,7 +22,6 @@ def close_db(e=None):
     if db is not None:
         db.close()
 
-## Rest of the file
 
 def init_db():
     db = get_db()
@@ -39,10 +38,6 @@ def init_db_command():
     click.echo('Initialized the database.')
 
 
-## Rest of the file
-
 def init_app(app):
     app.teardown_appcontext(close_db)
     app.cli.add_command(init_db_command)
-
-
