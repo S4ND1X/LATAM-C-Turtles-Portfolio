@@ -1,6 +1,6 @@
 import os
 from werkzeug.security import check_password_hash, generate_password_hash
-from flask import Flask, render_template, url_for, json, request
+from flask import Flask, render_template, json, request
 from flask_sqlalchemy import SQLAlchemy
 from flask_migrate import Migrate
 # from . import db
@@ -12,7 +12,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql+psycopg2://{user}:{passwd}@{host}:{port}/{table}'.format(
     user=os.getenv('POSTGRES_USER'),
     passwd=os.getenv('POSTGRES_PASSWORD'),
-    host=os.getenv('POSTGRES_HOST'),
+    host=os.getenv('POSTGRES_HOST   '),
     port=5432,
     table=os.getenv('POSTGRES_DB'))
 
@@ -36,7 +36,8 @@ class UserModel(db.Model):
         return f"<User {self.username}>"
 
 
-# code by kOssi (https://stackoverflow.com/questions/21133976/flask-load-local-json)
+# code by kOssi
+# (https://stackoverflow.com/questions/21133976/flask-load-local-json)
 SITE_ROOT = os.path.realpath(os.path.dirname(__file__))
 SITE_FOLDER = "static/data"
 
