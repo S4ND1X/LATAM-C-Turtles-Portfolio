@@ -42,5 +42,5 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Test endpoints
+      - name: Endpoint prod testing
         run: bash prod-test.sh
